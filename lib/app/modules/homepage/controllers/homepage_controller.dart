@@ -19,7 +19,7 @@ class HomepageController extends GetxController {
   // Method untuk menu Scan AR
   void goToScanAR() {
     print('=== MENU SCAN AR CLICKED ===');
-    // Get.toNamed('/scan-ar');
+    Get.toNamed('/scan-ar');
   }
 
   // Method untuk menu Main Game

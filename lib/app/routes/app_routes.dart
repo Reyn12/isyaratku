@@ -8,6 +8,7 @@ abstract class Routes {
   static const ON_BOARDING = _Paths.ON_BOARDING;
   static const HOMEPAGE = _Paths.HOMEPAGE;
   static const SCAN_AR = _Paths.SCAN_AR;
+  static const HASIL_SCAN = _Paths.HASIL_SCAN;
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
 }
@@ -19,6 +20,7 @@ abstract class _Paths {
   static const ON_BOARDING = '/on-boarding';
   static const HOMEPAGE = '/homepage';
   static const SCAN_AR = '/scan-ar';
+  static const HASIL_SCAN = '/hasil-scan';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
 }
