@@ -16,7 +16,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
     GetPage(
@@ -33,6 +33,8 @@ class AppPages {
       name: _Paths.ON_BOARDING,
       page: () => const OnBoardingView(),
       binding: OnBoardingBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
     ),
     GetPage(
       name: _Paths.HOMEPAGE,
