@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:isyaratku/utils/loading_dialog.dart';
 
 class OnBoardingController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -75,22 +76,25 @@ class OnBoardingController extends GetxController
 
   void skipToEnd() {
     currentPage.value = onboardingData.length - 1;
-    pageController.animateToPage(
-      currentPage.value,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
   }
 
   void goToSignUp() {
-    // Navigate to sign up page
-    // Get.toNamed('/signup');
-    print('Go to sign up page');
+    showLoading();
+    Future.delayed(const Duration(seconds: 1), () {
+      hideLoading();
+      Get.offAllNamed(
+        '/register',
+      ); // Langsung ke halaman register dan hapus stack sebelumnya
+    });
   }
 
   void goToLogin() {
-    // Navigate to login page
-    // Get.toNamed('/login');
-    print('Go to login page');
+    showLoading();
+    Future.delayed(const Duration(seconds: 1), () {
+      hideLoading();
+      Get.offAllNamed(
+        '/login',
+      ); // Langsung ke halaman login dan hapus stack sebelumnya
+    });
   }
 }
