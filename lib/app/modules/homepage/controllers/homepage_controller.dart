@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
 
 class HomepageController extends GetxController {
-  //TODO: Implement HomepageController
-
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +16,39 @@ class HomepageController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  // Method untuk menu Scan AR
+  void goToScanAR() {
+    print('=== MENU SCAN AR CLICKED ===');
+    // Get.toNamed('/scan-ar');
+  }
+
+  // Method untuk menu Main Game
+  void goToMainGame() {
+    print('=== MENU MAIN GAME CLICKED ===');
+    // Get.toNamed('/main-game');
+  }
+
+  // Method untuk menu Latihan Isyarat
+  void goToLatihanIsyarat() {
+    print('=== MENU LATIHAN ISYARAT CLICKED ===');
+    // Get.toNamed('/latihan-isyarat');
+  }
+
+  // Method untuk menu Progress-ku
+  void goToProgress() {
+    print('=== MENU PROGRESS CLICKED ===');
+    // Get.toNamed('/progress');
+  }
+
+  // Method untuk menu Panduan
+  void goToPanduan() {
+    print('=== MENU PANDUAN CLICKED ===');
+    // Get.toNamed('/panduan');
+  }
+
+  // Method untuk menu Pengaturan
+  void goToPengaturan() {
+    print('=== MENU PENGATURAN CLICKED ===');
+    // Get.toNamed('/pengaturan');
+  }
 }
