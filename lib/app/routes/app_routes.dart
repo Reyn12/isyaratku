@@ -11,6 +11,8 @@ abstract class Routes {
   static const HASIL_SCAN = _Paths.HASIL_SCAN;
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
+  static const PENGATURAN = _Paths.PENGATURAN;
+  static const PANDUAN = _Paths.PANDUAN;
 }
 
 abstract class _Paths {
@@ -23,4 +25,6 @@ abstract class _Paths {
   static const HASIL_SCAN = '/hasil-scan';
   static const LOGIN = '/login';
   static const REGISTER = '/register';
+  static const PENGATURAN = '/pengaturan';
+  static const PANDUAN = '/panduan';
 }

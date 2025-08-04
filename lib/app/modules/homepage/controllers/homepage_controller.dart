@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../widgets/coming_soon_fitur.dart';
 
 class HomepageController extends GetxController {
   @override
@@ -25,30 +26,42 @@ class HomepageController extends GetxController {
   // Method untuk menu Main Game
   void goToMainGame() {
     print('=== MENU MAIN GAME CLICKED ===');
-    // Get.toNamed('/main-game');
+    Get.dialog(
+      const ComingSoonFitur(),
+      barrierDismissible: false,
+    );
   }
 
   // Method untuk menu Latihan Isyarat
   void goToLatihanIsyarat() {
     print('=== MENU LATIHAN ISYARAT CLICKED ===');
-    // Get.toNamed('/latihan-isyarat');
+    Get.dialog(
+      const ComingSoonFitur(),
+      barrierDismissible: false,
+    );
   }
 
   // Method untuk menu Progress-ku
   void goToProgress() {
     print('=== MENU PROGRESS CLICKED ===');
-    // Get.toNamed('/progress');
+    Get.dialog(
+      const ComingSoonFitur(),
+      barrierDismissible: false,
+    );
   }
 
   // Method untuk menu Panduan
   void goToPanduan() {
     print('=== MENU PANDUAN CLICKED ===');
-    // Get.toNamed('/panduan');
+    Get.dialog(
+      const ComingSoonFitur(),
+      barrierDismissible: false,
+    );
   }
 
   // Method untuk menu Pengaturan
   void goToPengaturan() {
     print('=== MENU PENGATURAN CLICKED ===');
-    // Get.toNamed('/pengaturan');
+    Get.toNamed('/pengaturan');
   }
 }

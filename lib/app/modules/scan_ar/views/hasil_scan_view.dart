@@ -40,18 +40,6 @@ class HasilScanView extends GetView {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Back button
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Image.asset(
-                  'assets/icons/ic_back_1.png',
-                  width: 80,
-                  height: 80,
-                ),
-                onPressed: () => Get.back(),
-              ),
-            ),
             Expanded(
               child: Column(
                 children: [
