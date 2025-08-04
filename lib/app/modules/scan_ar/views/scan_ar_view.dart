@@ -166,7 +166,7 @@ class ScanArView extends GetView<ScanArController> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                'Tekan icon Scan lalu Arahkan\nkamera ke kartu untuk\nmenampilkan model 3D\ngerakan bahasa isyarat',
+                'Tekan icon Scan lalu Arahkan\nkamera ke kartu alfabet (A-E)\natau angka (0-5) untuk\nmenampilkan model 3D\ngerakan bahasa isyarat',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
@@ -180,48 +180,66 @@ class ScanArView extends GetView<ScanArController> {
             const Spacer(),
 
             // Upload button - stylish design
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Container(
-                width: double.infinity,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(color: const Color(0xFF1E40AF), width: 2),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: controller.isScanning.value 
+                        ? Colors.grey.withOpacity(0.3)
+                        : Colors.white,
                     borderRadius: BorderRadius.circular(25),
-                    onTap: () {
-                      controller.uploadFromGallery();
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.photo_library_outlined,
-                          color: Color(0xFF1E40AF),
-                          size: 20,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          'Upload dari Galeri',
-                          style: TextStyle(
-                            color: Color(0xFF1E40AF),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                    border: Border.all(color: const Color(0xFF1E40AF), width: 2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(25),
+                      onTap: controller.isScanning.value
+                          ? null
+                          : () {
+                              controller.uploadFromGallery();
+                            },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (controller.isScanning.value)
+                            const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Color(0xFF1E40AF),
+                              ),
+                            )
+                          else
+                            const Icon(
+                              Icons.photo_library_outlined,
+                              color: Color(0xFF1E40AF),
+                              size: 20,
+                            ),
+                          const SizedBox(width: 8),
+                          Text(
+                            controller.isScanning.value
+                                ? 'Memproses...'
+                                : 'Upload dari Galeri',
+                            style: TextStyle(
+                              color: Color(0xFF1E40AF),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

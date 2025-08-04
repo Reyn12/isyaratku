@@ -7,6 +7,24 @@ class HasilScanView extends GetView {
 
   @override
   Widget build(BuildContext context) {
+    // Ambil data dari arguments
+    final arguments = Get.arguments as Map<String, dynamic>?;
+    final String scanResult = arguments?['result'] ?? 'A'; // Default ke A klo ga ada data
+    
+    // Debug print
+    print('=== DEBUG HASIL SCAN VIEW ===');
+    print('=== DEBUG: Arguments: $arguments ===');
+    print('=== DEBUG: Scan result: $scanResult ===');
+    
+    // Tentukan folder berdasarkan hasil scan (alfabet atau angka)
+    final bool isAlfabet = ['A', 'B', 'C', 'D', 'E'].contains(scanResult.toUpperCase());
+    final String folder = isAlfabet ? 'alfabet' : 'angka';
+    final String imagePath = 'assets/images/$folder/img_isyarat_${scanResult.toLowerCase()}.png';
+    
+    print('=== DEBUG: Is alfabet: $isAlfabet ===');
+    print('=== DEBUG: Folder: $folder ===');
+    print('=== DEBUG: Image path: $imagePath ===');
+    
     // Set status bar hitam
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
@@ -58,11 +76,37 @@ class HasilScanView extends GetView {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Gambar isyarat A
+                          // Gambar isyarat sesuai hasil scan
                           Image.asset(
-                            'assets/images/alfabet/img_isyarat_a.png',
+                            imagePath,
                             height: 250,
                             fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) {
+                              // Debug error
+                              print('=== DEBUG: Image error: $error ===');
+                              print('=== DEBUG: Image path: $imagePath ===');
+                              print('=== DEBUG: Stack trace: $stackTrace ===');
+                              
+                              // Fallback klo gambar ga ada
+                              return Container(
+                                height: 250,
+                                width: 250,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    isAlfabet ? 'Huruf $scanResult' : 'Angka $scanResult',
+                                    style: TextStyle(
+                                      fontSize: 48,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF1E40AF),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           const SizedBox(height: 30),
 
@@ -77,8 +121,8 @@ class HasilScanView extends GetView {
                           ),
                           const SizedBox(height: 10),
 
-                          const Text(
-                            'Ini adalah Bahasa Isyarat\nhuruf A',
+                          Text(
+                            'Ini adalah Bahasa Isyarat\nhuruf $scanResult',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 16,
