@@ -53,10 +53,7 @@ class HomepageController extends GetxController {
   // Method untuk menu Panduan
   void goToPanduan() {
     print('=== MENU PANDUAN CLICKED ===');
-    Get.dialog(
-      const ComingSoonFitur(),
-      barrierDismissible: false,
-    );
+    Get.toNamed('/panduan');
   }
 
   // Method untuk menu Pengaturan

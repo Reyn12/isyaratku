@@ -91,6 +91,8 @@ class AppPages {
       name: _Paths.PANDUAN,
       page: () => const PanduanView(),
       binding: PanduanBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
     ),
   ];
 }
