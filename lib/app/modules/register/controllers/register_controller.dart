@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:isyaratku/utils/loading_dialog.dart';
 
 class RegisterController extends GetxController {
   // Form controllers
@@ -32,7 +33,10 @@ class RegisterController extends GetxController {
   }
 
   // Method untuk register (sementara print dulu)
-  void register() {
+  Future<void> register() async {
+    showLoading();
+    await Future.delayed(const Duration(seconds: 2));
+    hideLoading();
     print('=== REGISTER BUTTON PRESSED ===');
     print('Name: ${nameController.text}');
     print('Email: ${emailController.text}');
@@ -40,8 +44,9 @@ class RegisterController extends GetxController {
     print('Confirm Password: ${confirmPasswordController.text}');
     print('Is Agreed: ${isAgreed.value}');
     print('===============================');
+    Get.toNamed('/login');
   }
-  
+
   // Method untuk navigasi ke login
   void goToLogin() {
     print('=== GO TO LOGIN ===');

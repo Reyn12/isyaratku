@@ -12,6 +12,8 @@ import '../modules/panduan/bindings/panduan_binding.dart';
 import '../modules/panduan/views/panduan_view.dart';
 import '../modules/pengaturan/bindings/pengaturan_binding.dart';
 import '../modules/pengaturan/views/pengaturan_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/scan_ar/bindings/scan_ar_binding.dart';
@@ -91,6 +93,13 @@ class AppPages {
       name: _Paths.PANDUAN,
       page: () => const PanduanView(),
       binding: PanduanBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 500),
     ),
