@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
+import 'package:camera/camera.dart';
 import '../controllers/game_angka_controller.dart';
 
 class GameAngkaView extends GetView<GameAngkaController> {
@@ -87,11 +87,52 @@ class GameAngkaView extends GetView<GameAngkaController> {
                 child: AspectRatio(
                   aspectRatio: 1.0,
                   child: Container(
-                    color: const Color(
-                      0xFFD9D9D9,
-                    ), // Warna abu-abu untuk frame kamera
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD9D9D9), // Fallback color
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     child: Stack(
                       children: [
+                        // Camera Preview atau placeholder
+                        Obx(() {
+                          if (controller.isCameraInitialized.value && 
+                              controller.cameraController != null) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: CameraPreview(controller.cameraController!),
+                            );
+                          } else {
+                            return Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFD9D9D9),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.camera_alt_outlined,
+                                      size: 50,
+                                      color: Color(0xFF666666),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      'Menginisialisasi kamera...',
+                                      style: TextStyle(
+                                        color: Color(0xFF666666),
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+                        }),
+                        
                         // Corner frames hitam
                         Positioned(
                           top: 0,
@@ -167,57 +208,103 @@ class GameAngkaView extends GetView<GameAngkaController> {
                 ),
               ),
             ),
-
-            // Instruction Text
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Arahkan kamera ke kartu di sini',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF0A2753),
-                ),
+            
+            // Camera Capture Button
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Capture Button
+                  Expanded(
+                    child: Container(
+                      height: 45,
+                      margin: const EdgeInsets.only(right: 10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E40AF),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(25),
+                          onTap: controller.captureFromCamera,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.camera_alt,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                'Ambil Foto',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+                  // Upload from Gallery Button
+                  Expanded(
+                    child: Container(
+                      height: 45,
+                      margin: const EdgeInsets.only(left: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(color: const Color(0xFF1E40AF), width: 2),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(25),
+                          onTap: controller.uploadFromGallery,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.photo_library_outlined,
+                                color: Color(0xFF1E40AF),
+                                size: 20,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                'Galeri',
+                                style: TextStyle(
+                                  color: Color(0xFF1E40AF),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
 
-            // Upload from Gallery Button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              child: Container(
-                width: double.infinity,
-                height: 45,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(color: const Color(0xFF1E40AF), width: 2),
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(25),
-                    onTap: controller.uploadFromGallery,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.photo_library_outlined,
-                          color: Color(0xFF1E40AF),
-                          size: 20,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          'Upload dari Galeri',
-                          style: TextStyle(
-                            color: Color(0xFF1E40AF),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            // Instruction Text
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Text(
+                'Arahkan kamera atau ambil foto untuk scan isyarat angka',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF0A2753),
                 ),
               ),
             ),

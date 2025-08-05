@@ -3,15 +3,19 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:camera/camera.dart';
 
 class GameAngkaController extends GetxController {
-
+  // Camera variables
+  CameraController? cameraController;
+  var isCameraInitialized = false.obs;
   var isScanning = false.obs;
   var currentAngka = '1'.obs; // Default angka yang ditampilkan
   
   @override
   void onInit() {
     super.onInit();
+    _initCamera();
   }
 
   @override
@@ -21,7 +25,46 @@ class GameAngkaController extends GetxController {
 
   @override
   void onClose() {
+    cameraController?.dispose();
     super.onClose();
+  }
+  
+  // Method untuk inisialisasi kamera
+  Future<void> _initCamera() async {
+    try {
+      print('Initializing camera...');
+      
+      // Get available cameras
+      final cameras = await availableCameras();
+      if (cameras.isEmpty) {
+        print('No cameras available');
+        return;
+      }
+      
+      // Use back camera (index 0 biasanya back camera)
+      final camera = cameras.first;
+      
+      // Initialize camera controller
+      cameraController = CameraController(
+        camera,
+        ResolutionPreset.medium,
+        enableAudio: false,
+      );
+      
+      await cameraController!.initialize();
+      
+      isCameraInitialized.value = true;
+      print('Camera initialized successfully');
+      
+    } catch (e) {
+      print('Error initializing camera: $e');
+      Get.snackbar(
+        'Camera Error',
+        'Gagal menginisialisasi kamera: $e',
+        backgroundColor: Colors.red.withOpacity(0.8),
+        colorText: Colors.white,
+      );
+    }
   }
 
   // Method untuk kembali ke halaman sebelumnya
@@ -30,30 +73,46 @@ class GameAngkaController extends GetxController {
     Get.back();
   }
 
-  // Method untuk scan dari kamera
-  Future<void> scanFromCamera() async {
-    isScanning.value = true;
-    print('Scanning angka from camera...');
-
+  // Method untuk capture foto dari kamera
+  Future<void> captureFromCamera() async {
     try {
-      // Simulasi delay untuk scan
-      await Future.delayed(const Duration(seconds: 2));
+      print('Capture from camera tapped');
       
-      // TODO: Implementasi scan kamera yang sebenarnya
+      if (cameraController == null || !cameraController!.value.isInitialized) {
+        Get.snackbar(
+          'Camera Error',
+          'Kamera belum siap. Silakan tunggu...',
+          backgroundColor: Colors.orange.withOpacity(0.8),
+          colorText: Colors.white,
+        );
+        return;
+      }
       
-      // Simulasi hasil scan
-      print('Camera scan completed');
+      isScanning.value = true;
+      
+      // Capture image
+      final XFile capturedImage = await cameraController!.takePicture();
+      
+      print('Image captured: ${capturedImage.path}');
+      
+      // Process captured image
+      await _processUploadedImage(capturedImage.path);
+      
+      isScanning.value = false;
+      
     } catch (e) {
-      print('Error scanning from camera: $e');
+      print('Error capturing image: $e');
+      isScanning.value = false;
       Get.snackbar(
         'Error',
-        'Gagal scan dari kamera: $e',
-        snackPosition: SnackPosition.BOTTOM,
+        'Gagal mengambil foto: $e',
+        backgroundColor: Colors.red.withOpacity(0.8),
+        colorText: Colors.white,
       );
     }
-
-    isScanning.value = false;
   }
+
+
 
   // Method untuk upload dari galeri
   Future<void> uploadFromGallery() async {

@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'dart:io';
-// import 'package:camera/camera.dart'; // commented untuk sementara
+import 'package:camera/camera.dart';
 
 class ScanArController extends GetxController {
-  // late CameraController cameraController; // commented untuk sementara
+  CameraController? cameraController;
   final ImagePicker _picker = ImagePicker();
 
   // Observable untuk status kamera
@@ -16,7 +16,7 @@ class ScanArController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // initCamera(); // commented untuk sementara
+    initCamera();
   }
 
   @override
@@ -26,7 +26,7 @@ class ScanArController extends GetxController {
 
   @override
   void onClose() {
-    // cameraController.dispose(); // commented untuk sementara
+    cameraController?.dispose();
     super.onClose();
   }
 
@@ -92,8 +92,7 @@ class ScanArController extends GetxController {
     }
   }
 
-  // Initialize camera (commented untuk sementara)
-  /*
+  // Initialize camera
   Future<void> initCamera() async {
     try {
       final cameras = await availableCameras();
@@ -102,40 +101,50 @@ class ScanArController extends GetxController {
           cameras.first,
           ResolutionPreset.medium,
         );
-        await cameraController.initialize();
+        await cameraController!.initialize();
         isCameraInitialized.value = true;
       }
     } catch (e) {
       print('Error initializing camera: $e');
+      Get.snackbar(
+        'Error',
+        'Gagal menginisialisasi kamera: $e',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
-  */
 
-  // Scan from camera (real scan)
+  // Capture photo from camera and scan QR
   Future<void> scanFromCamera() async {
+    if (cameraController == null || !cameraController!.value.isInitialized) {
+      Get.snackbar(
+        'Error',
+        'Kamera belum siap. Silakan tunggu sebentar.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
     isScanning.value = true;
-    print('=== DEBUG: Scanning from camera... ===');
+    print('=== DEBUG: Capturing photo from camera... ===');
 
     try {
-      // Di sini kamu implement camera QR scanner yang beneran
-      // Contoh dengan qr_code_scanner atau mobile_scanner
-      
-      // Untuk sementara, simulasi delay
-      await Future.delayed(Duration(seconds: 2));
-      
-      // Simulasi hasil scan dari camera
-      // Nanti ganti dengan hasil scan yang beneran
-      scannedResult.value = 'A'; // Default, nanti ganti dengan hasil scan QR
+      // Capture photo from camera
+      final XFile photo = await cameraController!.takePicture();
+      print('=== DEBUG: Photo captured: ${photo.path} ===');
 
-      print('=== DEBUG: Camera scan result: ${scannedResult.value} ===');
+      // Scan QR code from captured photo
+      final scanResult = await scanQRFromImage(photo.path);
+      scannedResult.value = scanResult;
+      print('=== DEBUG: QR scan result: $scanResult ===');
 
       // Navigate to hasil scan dengan data
       Get.toNamed('/hasil-scan', arguments: {'result': scannedResult.value});
     } catch (e) {
-      print('=== DEBUG: Error scanning from camera: $e ===');
+      print('=== DEBUG: Error capturing from camera: $e ===');
       Get.snackbar(
         'Error',
-        'Gagal scan dari camera: $e',
+        'Gagal mengambil foto: $e',
         snackPosition: SnackPosition.BOTTOM,
       );
     }

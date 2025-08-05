@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-// import 'package:camera/camera.dart'; // commented untuk sementara
+import 'package:camera/camera.dart';
 
 import '../controllers/scan_ar_controller.dart';
 
@@ -63,6 +63,26 @@ class ScanArView extends GetView<ScanArController> {
                     ),
                     child: Stack(
                       children: [
+                        // Camera preview di dalam frame
+                        Obx(() {
+                          if (controller.isCameraInitialized.value &&
+                              controller.cameraController != null) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: CameraPreview(controller.cameraController!),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text(
+                                'Menginisialisasi kamera...',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            );
+                          }
+                        }),
                         // Corner frames hitam yang lebih besar
                         Positioned(
                           top: 0,
