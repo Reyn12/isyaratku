@@ -3,3 +3,4 @@ analyzer:
   errors:
     deprecated_member_use: ignore
     avoid_print: ignore
+    constant_identifier_names: ignore

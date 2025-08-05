@@ -4,7 +4,7 @@ import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,13 +14,13 @@ class ProfileView extends GetView<ProfileController> {
           children: [
             // Header Section
             _buildHeader(),
-            
+
             // Profile Avatar Section
             _buildProfileAvatar(),
-            
+
             // Avatar Selection Section
             _buildAvatarSelection(),
-            
+
             // Continue Learning Section
             _buildContinueLearning(),
           ],
@@ -41,7 +41,7 @@ class ProfileView extends GetView<ProfileController> {
               width: 80,
               height: 80,
             ),
-          )
+          ),
           // const SizedBox(width: 40), // Balance the back button
         ],
       ),
@@ -52,23 +52,20 @@ class ProfileView extends GetView<ProfileController> {
     return Column(
       children: [
         const Text(
-            'Profilku',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF1E3A8A), // Dark blue
-            ),
+          'Profilku',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF1E3A8A), // Dark blue
           ),
+        ),
         // Main Avatar
         Container(
           width: 120,
           height: 120,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(
-              color: Colors.white,
-              width: 4,
-            ),
+            border: Border.all(color: Colors.white, width: 4),
           ),
           child: ClipOval(
             child: Image.asset(
@@ -78,13 +75,13 @@ class ProfileView extends GetView<ProfileController> {
           ),
         ),
         const SizedBox(height: 16),
-        
+
         // Name Section
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Namaku',
+              'Bambang Firman',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -120,12 +117,15 @@ class ProfileView extends GetView<ProfileController> {
           ),
         ),
         const SizedBox(height: 12),
-        
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildAvatarOption('assets/images/img_avatar1.png', false),
-            _buildAvatarOption('assets/images/img_avatar2.png', true), // Selected
+            _buildAvatarOption(
+              'assets/images/img_avatar2.png',
+              true,
+            ), // Selected
             _buildAvatarOption('assets/images/img_avatar3.png', false),
           ],
         ),
@@ -140,25 +140,24 @@ class ProfileView extends GetView<ProfileController> {
       height: 80,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: isSelected 
-          ? Border.all(color: const Color(0xFF16A34A), width: 3)
-          : null,
-        boxShadow: isSelected 
-          ? [
-              BoxShadow(
-                color: const Color(0xFF16A34A).withOpacity(0.3),
-                blurRadius: 8,
-                spreadRadius: 2,
-              )
-            ]
-          : null,
+        border:
+            isSelected
+                ? Border.all(color: const Color(0xFF16A34A), width: 3)
+                : null,
+        boxShadow:
+            isSelected
+                ? [
+                  BoxShadow(
+                    color: const Color(0xFF16A34A).withOpacity(0.3),
+                    blurRadius: 8,
+                    spreadRadius: 2,
+                  ),
+                ]
+                : null,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-        child: Image.asset(
-          imagePath,
-          fit: BoxFit.cover,
-        ),
+        child: Image.asset(imagePath, fit: BoxFit.cover),
       ),
     );
   }
@@ -180,7 +179,7 @@ class ProfileView extends GetView<ProfileController> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -213,7 +212,12 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  Widget _buildLearningModule(String imagePath, String title, int progress, Color progressColor) {
+  Widget _buildLearningModule(
+    String imagePath,
+    String title,
+    int progress,
+    Color progressColor,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -239,14 +243,11 @@ class ProfileView extends GetView<ProfileController> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset(imagePath, fit: BoxFit.cover),
             ),
           ),
           const SizedBox(width: 16),
-          
+
           // Module Info
           Expanded(
             child: Column(
@@ -274,7 +275,7 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
                 const SizedBox(height: 8),
-                
+
                 // Progress Bar
                 Container(
                   height: 8,
@@ -294,7 +295,7 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                
+
                 // Continue Button
                 Container(
                   width: double.infinity,

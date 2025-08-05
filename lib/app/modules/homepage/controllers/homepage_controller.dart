@@ -26,28 +26,19 @@ class HomepageController extends GetxController {
   // Method untuk menu Main Game
   void goToMainGame() {
     print('=== MENU MAIN GAME CLICKED ===');
-    Get.dialog(
-      const ComingSoonFitur(),
-      barrierDismissible: false,
-    );
+    Get.toNamed('/main-game');
   }
 
   // Method untuk menu Latihan Isyarat
   void goToLatihanIsyarat() {
     print('=== MENU LATIHAN ISYARAT CLICKED ===');
-    Get.dialog(
-      const ComingSoonFitur(),
-      barrierDismissible: false,
-    );
+    Get.dialog(const ComingSoonFitur(), barrierDismissible: false);
   }
 
   // Method untuk menu Progress-ku
   void goToProgress() {
     print('=== MENU PROGRESS CLICKED ===');
-    Get.dialog(
-      const ComingSoonFitur(),
-      barrierDismissible: false,
-    );
+    Get.dialog(const ComingSoonFitur(), barrierDismissible: false);
   }
 
   // Method untuk menu Panduan

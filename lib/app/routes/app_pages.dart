@@ -6,6 +6,11 @@ import '../modules/homepage/bindings/homepage_binding.dart';
 import '../modules/homepage/views/homepage_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/main_game/bindings/main_game_binding.dart';
+import '../modules/main_game/views/main_game_view.dart';
+import '../modules/main_game/views/game_angka_view.dart';
+import '../modules/main_game/views/hasil_scan_angka_benar_view.dart';
+import '../modules/main_game/views/hasil_scan_angka_salah_view.dart';
 import '../modules/on_boarding/bindings/on_boarding_binding.dart';
 import '../modules/on_boarding/views/on_boarding_view.dart';
 import '../modules/panduan/bindings/panduan_binding.dart';
@@ -100,6 +105,32 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.MAIN_GAME,
+      page: () => const MainGameView(),
+      binding: MainGameBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.GAME_ANGKA,
+      page: () => const GameAngkaView(),
+      binding: MainGameBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.HASIL_SCAN_ANGKA_BENAR,
+      page: () => const HasilScanAngkaBenarView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.HASIL_SCAN_ANGKA_SALAH,
+      page: () => const HasilScanAngkaSalahView(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 500),
     ),

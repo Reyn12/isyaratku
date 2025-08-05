@@ -14,6 +14,10 @@ abstract class Routes {
   static const PENGATURAN = _Paths.PENGATURAN;
   static const PANDUAN = _Paths.PANDUAN;
   static const PROFILE = _Paths.PROFILE;
+  static const MAIN_GAME = _Paths.MAIN_GAME;
+  static const GAME_ANGKA = _Paths.GAME_ANGKA;
+  static const HASIL_SCAN_ANGKA_BENAR = _Paths.HASIL_SCAN_ANGKA_BENAR;
+  static const HASIL_SCAN_ANGKA_SALAH = _Paths.HASIL_SCAN_ANGKA_SALAH;
 }
 
 abstract class _Paths {
@@ -29,4 +33,8 @@ abstract class _Paths {
   static const PENGATURAN = '/pengaturan';
   static const PANDUAN = '/panduan';
   static const PROFILE = '/profile';
+  static const MAIN_GAME = '/main-game';
+  static const GAME_ANGKA = '/game-angka';
+  static const HASIL_SCAN_ANGKA_BENAR = '/hasil-scan-angka-benar';
+  static const HASIL_SCAN_ANGKA_SALAH = '/hasil-scan-angka-salah';
 }

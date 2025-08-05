@@ -9,22 +9,30 @@ class HasilScanView extends GetView {
   Widget build(BuildContext context) {
     // Ambil data dari arguments
     final arguments = Get.arguments as Map<String, dynamic>?;
-    final String scanResult = arguments?['result'] ?? 'A'; // Default ke A klo ga ada data
-    
+    final String scanResult =
+        arguments?['result'] ?? 'A'; // Default ke A klo ga ada data
+
     // Debug print
     print('=== DEBUG HASIL SCAN VIEW ===');
     print('=== DEBUG: Arguments: $arguments ===');
     print('=== DEBUG: Scan result: $scanResult ===');
-    
+
     // Tentukan folder berdasarkan hasil scan (alfabet atau angka)
-    final bool isAlfabet = ['A', 'B', 'C', 'D', 'E'].contains(scanResult.toUpperCase());
+    final bool isAlfabet = [
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+    ].contains(scanResult.toUpperCase());
     final String folder = isAlfabet ? 'alfabet' : 'angka';
-    final String imagePath = 'assets/images/$folder/img_isyarat_${scanResult.toLowerCase()}.png';
-    
+    final String imagePath =
+        'assets/images/$folder/img_isyarat_${scanResult.toLowerCase()}.png';
+
     print('=== DEBUG: Is alfabet: $isAlfabet ===');
     print('=== DEBUG: Folder: $folder ===');
     print('=== DEBUG: Image path: $imagePath ===');
-    
+
     // Set status bar hitam
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
@@ -74,7 +82,7 @@ class HasilScanView extends GetView {
                               print('=== DEBUG: Image error: $error ===');
                               print('=== DEBUG: Image path: $imagePath ===');
                               print('=== DEBUG: Stack trace: $stackTrace ===');
-                              
+
                               // Fallback klo gambar ga ada
                               return Container(
                                 height: 250,
@@ -85,7 +93,9 @@ class HasilScanView extends GetView {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    isAlfabet ? 'Huruf $scanResult' : 'Angka $scanResult',
+                                    isAlfabet
+                                        ? 'Huruf $scanResult'
+                                        : 'Angka $scanResult',
                                     style: TextStyle(
                                       fontSize: 48,
                                       fontWeight: FontWeight.bold,
@@ -97,17 +107,6 @@ class HasilScanView extends GetView {
                             },
                           ),
                           const SizedBox(height: 30),
-
-                          // Text jawaban
-                          const Text(
-                            'Kamu Benar!',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF1E40AF),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
 
                           Text(
                             'Ini adalah Bahasa Isyarat\nhuruf $scanResult',
