@@ -32,7 +32,7 @@ class HomepageController extends GetxController {
   // Method untuk menu Latihan Isyarat
   void goToLatihanIsyarat() {
     print('=== MENU LATIHAN ISYARAT CLICKED ===');
-    Get.dialog(const ComingSoonFitur(), barrierDismissible: false);
+    Get.toNamed('/latihan');
   }
 
   // Method untuk menu Progress-ku

@@ -21,6 +21,8 @@ abstract class Routes {
   static const GAME_ALFABET = _Paths.GAME_ALFABET;
   static const HASIL_SCAN_ALFABET_BENAR = _Paths.HASIL_SCAN_ALFABET_BENAR;
   static const HASIL_SCAN_ALFABET_SALAH = _Paths.HASIL_SCAN_ALFABET_SALAH;
+  static const LATIHAN = _Paths.LATIHAN;
+  static const HASIL_LATIHAN = _Paths.HASIL_LATIHAN;
 }
 
 abstract class _Paths {
@@ -43,4 +45,6 @@ abstract class _Paths {
   static const GAME_ALFABET = '/game-alfabet';
   static const HASIL_SCAN_ALFABET_BENAR = '/hasil-scan-alfabet-benar';
   static const HASIL_SCAN_ALFABET_SALAH = '/hasil-scan-alfabet-salah';
+  static const LATIHAN = '/latihan';
+  static const HASIL_LATIHAN = '/hasil-latihan';
 }

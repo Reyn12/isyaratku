@@ -58,7 +58,9 @@ class ScanArView extends GetView<ScanArController> {
                   aspectRatio: 1.0,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFFAFE4E1), // Warna tosca sesuai gambar
+                      color: const Color(
+                        0xFFAFE4E1,
+                      ), // Warna tosca sesuai gambar
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Stack(
@@ -69,7 +71,30 @@ class ScanArView extends GetView<ScanArController> {
                               controller.cameraController != null) {
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              child: CameraPreview(controller.cameraController!),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: SizedBox(
+                                    width:
+                                        controller
+                                            .cameraController!
+                                            .value
+                                            .previewSize!
+                                            .height,
+                                    height:
+                                        controller
+                                            .cameraController!
+                                            .value
+                                            .previewSize!
+                                            .width,
+                                    child: CameraPreview(
+                                      controller.cameraController!,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             );
                           } else {
                             return const Center(
@@ -107,7 +132,10 @@ class ScanArView extends GetView<ScanArController> {
                             decoration: const BoxDecoration(
                               border: Border(
                                 top: BorderSide(color: Colors.black, width: 8),
-                                right: BorderSide(color: Colors.black, width: 8),
+                                right: BorderSide(
+                                  color: Colors.black,
+                                  width: 8,
+                                ),
                               ),
                             ),
                           ),
@@ -120,7 +148,10 @@ class ScanArView extends GetView<ScanArController> {
                             height: 70, // Lebih besar
                             decoration: const BoxDecoration(
                               border: Border(
-                                bottom: BorderSide(color: Colors.black, width: 8),
+                                bottom: BorderSide(
+                                  color: Colors.black,
+                                  width: 8,
+                                ),
                                 left: BorderSide(color: Colors.black, width: 8),
                               ),
                             ),
@@ -134,8 +165,14 @@ class ScanArView extends GetView<ScanArController> {
                             height: 70, // Lebih besar
                             decoration: const BoxDecoration(
                               border: Border(
-                                bottom: BorderSide(color: Colors.black, width: 8),
-                                right: BorderSide(color: Colors.black, width: 8),
+                                bottom: BorderSide(
+                                  color: Colors.black,
+                                  width: 8,
+                                ),
+                                right: BorderSide(
+                                  color: Colors.black,
+                                  width: 8,
+                                ),
                               ),
                             ),
                           ),
@@ -213,11 +250,15 @@ class ScanArView extends GetView<ScanArController> {
                         width: double.infinity,
                         height: 45,
                         decoration: BoxDecoration(
-                          color: controller.isScanning.value 
-                              ? Colors.grey.withOpacity(0.3)
-                              : Colors.white,
+                          color:
+                              controller.isScanning.value
+                                  ? Colors.grey.withOpacity(0.3)
+                                  : Colors.white,
                           borderRadius: BorderRadius.circular(25),
-                          border: Border.all(color: const Color(0xFF1E40AF), width: 2),
+                          border: Border.all(
+                            color: const Color(0xFF1E40AF),
+                            width: 2,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.1),
@@ -230,11 +271,12 @@ class ScanArView extends GetView<ScanArController> {
                           color: Colors.transparent,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(25),
-                            onTap: controller.isScanning.value
-                                ? null
-                                : () {
-                                    controller.uploadFromGallery();
-                                  },
+                            onTap:
+                                controller.isScanning.value
+                                    ? null
+                                    : () {
+                                      controller.uploadFromGallery();
+                                    },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

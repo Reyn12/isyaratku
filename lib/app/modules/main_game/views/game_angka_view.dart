@@ -99,7 +99,18 @@ class GameAngkaView extends GetView<GameAngkaController> {
                               controller.cameraController != null) {
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(8),
-                              child: CameraPreview(controller.cameraController!),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: SizedBox(
+                                    width: controller.cameraController!.value.previewSize!.height,
+                                    height: controller.cameraController!.value.previewSize!.width,
+                                    child: CameraPreview(controller.cameraController!),
+                                  ),
+                                ),
+                              ),
                             );
                           } else {
                             return Container(

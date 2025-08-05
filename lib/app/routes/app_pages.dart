@@ -4,16 +4,19 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/homepage/bindings/homepage_binding.dart';
 import '../modules/homepage/views/homepage_view.dart';
+import '../modules/latihan/bindings/latihan_binding.dart';
+import '../modules/latihan/views/latihan_view.dart';
+import '../modules/latihan/views/hasil_latihan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/main_game/bindings/main_game_binding.dart';
-import '../modules/main_game/views/main_game_view.dart';
-import '../modules/main_game/views/game_angka_view.dart';
-import '../modules/main_game/views/hasil_scan_angka_benar_view.dart';
-import '../modules/main_game/views/hasil_scan_angka_salah_view.dart';
 import '../modules/main_game/views/game_alfabet_view.dart';
+import '../modules/main_game/views/game_angka_view.dart';
 import '../modules/main_game/views/hasil_scan_alfabet_benar_view.dart';
 import '../modules/main_game/views/hasil_scan_alfabet_salah_view.dart';
+import '../modules/main_game/views/hasil_scan_angka_benar_view.dart';
+import '../modules/main_game/views/hasil_scan_angka_salah_view.dart';
+import '../modules/main_game/views/main_game_view.dart';
 import '../modules/on_boarding/bindings/on_boarding_binding.dart';
 import '../modules/on_boarding/views/on_boarding_view.dart';
 import '../modules/panduan/bindings/panduan_binding.dart';
@@ -153,6 +156,19 @@ class AppPages {
     GetPage(
       name: _Paths.HASIL_SCAN_ALFABET_SALAH,
       page: () => const HasilScanAlfabetSalahView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.LATIHAN,
+      page: () => const LatihanView(),
+      binding: LatihanBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.HASIL_LATIHAN,
+      page: () => const HasilLatihanView(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 500),
     ),
