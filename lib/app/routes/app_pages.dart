@@ -11,6 +11,9 @@ import '../modules/main_game/views/main_game_view.dart';
 import '../modules/main_game/views/game_angka_view.dart';
 import '../modules/main_game/views/hasil_scan_angka_benar_view.dart';
 import '../modules/main_game/views/hasil_scan_angka_salah_view.dart';
+import '../modules/main_game/views/game_alfabet_view.dart';
+import '../modules/main_game/views/hasil_scan_alfabet_benar_view.dart';
+import '../modules/main_game/views/hasil_scan_alfabet_salah_view.dart';
 import '../modules/on_boarding/bindings/on_boarding_binding.dart';
 import '../modules/on_boarding/views/on_boarding_view.dart';
 import '../modules/panduan/bindings/panduan_binding.dart';
@@ -131,6 +134,25 @@ class AppPages {
     GetPage(
       name: _Paths.HASIL_SCAN_ANGKA_SALAH,
       page: () => const HasilScanAngkaSalahView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.GAME_ALFABET,
+      page: () => const GameAlfabetView(),
+      binding: MainGameBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.HASIL_SCAN_ALFABET_BENAR,
+      page: () => const HasilScanAlfabetBenarView(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.HASIL_SCAN_ALFABET_SALAH,
+      page: () => const HasilScanAlfabetSalahView(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 500),
     ),

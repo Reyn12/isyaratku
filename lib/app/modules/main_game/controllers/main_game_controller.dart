@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../widgets/coming_soon_fitur.dart';
 
 class MainGameController extends GetxController {
   @override
@@ -18,7 +19,7 @@ class MainGameController extends GetxController {
 
   void onAlfabetTap() {
     print('Alfabet button tapped');
-    // TODO: Implement navigation to Alfabet game
+    Get.toNamed('/game-alfabet');
   }
 
   void onAngkaTap() {
@@ -28,12 +29,17 @@ class MainGameController extends GetxController {
 
   void onHewanTap() {
     print('Hewan button tapped');
-    // TODO: Implement navigation to Hewan game
+    _showComingSoon();
   }
 
   void onBuahMakananTap() {
     print('Buah dan Makanan button tapped');
-    // TODO: Implement navigation to Buah dan Makanan game
+    _showComingSoon();
+  }
+
+  // Show coming soon dialog
+  void _showComingSoon() {
+    Get.dialog(const ComingSoonFitur(), barrierDismissible: false);
   }
 
   void onBackTap() {
